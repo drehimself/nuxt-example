@@ -193,7 +193,12 @@ module.exports = {
   */
 
   fonts: {
+    'heading': [
+      'Montserrat',
+      'sans-serif'
+    ],
     'sans': [
+      'Open Sans',
       'system-ui',
       'BlinkMacSystemFont',
       '-apple-system',
@@ -927,7 +932,7 @@ module.exports = {
   plugins: [
     require('tailwindcss/plugins/container')({
       // center: true,
-      // padding: '1rem',
+      padding: '1rem',
     }),
   ],
 

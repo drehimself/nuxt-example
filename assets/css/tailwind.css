@@ -18,6 +18,10 @@
   opacity: 0;
 }
 
+.overflow-dots {
+  text-overflow: ellipsis;
+}
+
 /**
  * This injects any component classes registered by plugins.
  *
