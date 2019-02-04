@@ -12,17 +12,16 @@
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
+
 import axios from 'axios'
 
 export default {
   components: {
-    Logo
+
   },
   asyncData ({ params, error }) {
     const proxyurl = 'https://cors-anywhere.herokuapp.com/'
-
-    return axios.get(`${proxyurl}https://api-endpoint.igdb.com/games/?fields=name,genres.name,cover,popularity&order=popularity:desc&expand=genres`)
+    return axios.get(`${proxyurl}https://api-v3.igdb.com/games/?fields=name,genres.name,cover.url,popularity&order=popularity:desc&expand=genres`)
     .then((res) => {
       return {
         games: res.data
@@ -34,7 +33,7 @@ export default {
   },
   data() {
     return {
-
+      games: []
     }
   }
 }
