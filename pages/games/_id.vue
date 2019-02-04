@@ -5,9 +5,7 @@
         <div class="w-full md:w-1/4"></div>
         <div class="w-full md:w-3/4 md:ml-12">
           <h1 class="font-heading text-white">{{ game.name }}</h1>
-          <div class="text-white">{{ game.publishers[0].name }}</div>
         </div>
-
       </div>
     </div>
 
@@ -28,7 +26,7 @@
           <a :href="getOfficialWebsite">Official Website</a>
         </div>
 
-        <div class="mb-10">
+        <div class="mb-10" v-if="game.total_rating">
           <div class="text-5xl font-semibold">{{ Math.round(game.total_rating) }}%</div>
           <div class="font-semibold">Overall Rating</div>
         </div>
@@ -54,7 +52,7 @@
 import axios from 'axios'
 
 export default {
-  computed: {
+  methods: {
     getOfficialWebsite() {
       return this.game.websites.filter(website => website.category === 1)[0].url
     },
@@ -64,8 +62,7 @@ export default {
   },
   asyncData ({ params, error }) {
     const proxyurl = 'https://cors-anywhere.herokuapp.com/'
-
-    return axios.get(`${proxyurl}https://api-endpoint.igdb.com/games/${params.id}/?fields=name,publishers.name,cover,summary,platforms.name,first_release_date,websites,total_rating,screenshots&expand=publishers,platforms`)
+    return axios.get(`${proxyurl}https://api-v3.igdb.com/games/${params.id}/?fields=name,cover.url,summary,platforms.name,first_release_date,websites,total_rating,screenshots.url,total_rating&expand=platforms,screenshots,cover`)
     .then((res) => {
       return {
         game: res.data[0]
